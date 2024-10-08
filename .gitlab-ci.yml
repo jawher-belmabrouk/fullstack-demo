@@ -1,4 +1,4 @@
-build:
+Build backend:
   stage: build
   tags:
     - WSL
@@ -11,4 +11,18 @@ build:
       --context backend
       --dockerfile backend/Dockerfile
       --destination jawherbelmabrouk/fullstack-demo:book-app-spring-boot-app
+  when: manual
+Build frontend:
+  stage: build
+  tags:
+    - WSL
+  image:
+    name: gcr.io/kaniko-project/executor:v1.23.2-debug
+    entrypoint: [""]
+  script:
+    - echo "{\"auths\":{\"https://index.docker.io/v1/\":{\"auth\":\"amF3aGVyYmVsbWFicm91azp6KzFpdGF2P1Zvc1dvMnJ1NjFlag==\"}}}" > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --context frontend
+      --dockerfile frontend/Dockerfile
+      --destination jawherbelmabrouk/fullstack-demo:book-app-react-app
   when: manual
