@@ -1,3 +1,7 @@
+stages:
+  - build
+  - deploy
+  
 Build frontend:
   stage: build
   tags:
@@ -28,4 +32,17 @@ Build backend:
       --context backend
       --dockerfile backend/Dockerfile
       --destination jawherbelmabrouk/fullstack-demo:book-app-spring-boot-app
+  when: manual
+
+Deploy to Kubernetes:
+  stage: deploy
+  variables:
+    KUBE_CONTEXT: fullstack-demo:wsl
+  before_script:
+    - if [ -n "$KUBE_CONTEXT" ]; then kubectl config use-context "$KUBE_CONTEXT"; fi
+  tags:
+    - WSL
+  image: dtzar/helm-kubectl
+  script:
+    - helm upgrade --install fullstack-demo chartfullstack
   when: manual

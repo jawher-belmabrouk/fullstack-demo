@@ -1,0 +1,9 @@
+ci_access:
+  projects:
+    - id: j.belmabrouk/fullstack-demo
+
+user_access:
+  access_as:
+      agent: {}
+  projects:
+      - id: j.belmabrouk/fullstack-demo
