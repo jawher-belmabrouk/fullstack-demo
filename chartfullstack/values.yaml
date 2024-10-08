@@ -1,0 +1,31 @@
+kubernetesClusterDomain: cluster.local
+reactApp:
+  reactApp:
+    image:
+      repository: jawherbelmabrouk/fullstack-demo
+      tag: book-app-react-app
+    imagePullPolicy: Always
+  replicas: 1
+reactAppService:
+  ports:
+  - port: 3000
+    protocol: TCP
+    targetPort: 80
+  type: NodePort
+springBootApp:
+  replicas: 1
+  springBootApp:
+    env:
+      springDatasourcePassword: AVNS_kI61k6Ekh_t1tLru2fp
+      springDatasourceUrl: jdbc:postgresql://pg-1c9cb8a8-postgresql-test-345346.i.aivencloud.com:16638/defaultdb?ssl=verify&user=avnadmin&password=AVNS_kI61k6Ekh_t1tLru2fp
+      springDatasourceUsername: avnadmin
+    image:
+      repository: jawherbelmabrouk/fullstack-demo
+      tag: book-app-spring-boot-app
+    imagePullPolicy: Always
+springBootAppService:
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+  type: NodePort

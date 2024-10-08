@@ -1,0 +1,67 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chartfullstack.fullname" . }}-spring-boot-app
+  labels:
+  {{- include "chartfullstack.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.springBootApp.replicas }}
+  selector:
+    matchLabels:
+      app: spring-boot-app
+    {{- include "chartfullstack.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: spring-boot-app
+      {{- include "chartfullstack.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: SPRING_DATASOURCE_URL
+          value: {{ quote .Values.springBootApp.springBootApp.env.springDatasourceUrl }}
+        - name: SPRING_DATASOURCE_USERNAME
+          value: {{ quote .Values.springBootApp.springBootApp.env.springDatasourceUsername
+            }}
+        - name: SPRING_DATASOURCE_PASSWORD
+          value: {{ quote .Values.springBootApp.springBootApp.env.springDatasourcePassword
+            }}
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.springBootApp.springBootApp.image.repository }}:{{ .Values.springBootApp.springBootApp.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.springBootApp.springBootApp.imagePullPolicy }}
+        name: spring-boot-app
+        ports:
+        - containerPort: 8080
+        resources: {}
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "chartfullstack.fullname" . }}-react-app
+  labels:
+  {{- include "chartfullstack.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.reactApp.replicas }}
+  selector:
+    matchLabels:
+      app: react-app
+    {{- include "chartfullstack.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        app: react-app
+      {{- include "chartfullstack.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: KUBERNETES_CLUSTER_DOMAIN
+          value: {{ quote .Values.kubernetesClusterDomain }}
+        image: {{ .Values.reactApp.reactApp.image.repository }}:{{ .Values.reactApp.reactApp.image.tag
+          | default .Chart.AppVersion }}
+        imagePullPolicy: {{ .Values.reactApp.reactApp.imagePullPolicy }}
+        name: react-app
+        ports:
+        - containerPort: 80
+        resources: {}
