@@ -1,0 +1,11 @@
+build:
+  stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:v1.23.2-debug
+    entrypoint: [""]
+  script:
+    - /kaniko/executor
+      --context backend
+      --dockerfile backend/Dockerfile
+      --destination jawherbelmabrouk/fullstack-demo:book-app-spring-boot-app:v2
+  when: manual
