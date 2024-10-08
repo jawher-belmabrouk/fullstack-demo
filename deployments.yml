@@ -16,6 +16,7 @@ spec:
       containers:
         - name: spring-boot-app
           image: jawherbelmabrouk/fullstack-demo:book-app-spring-boot-app
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
           env:
@@ -57,6 +58,7 @@ spec:
       containers:
         - name: react-app
           image: jawherbelmabrouk/fullstack-demo:book-app-react-app
+          imagePullPolicy: Always
           ports:
             - containerPort: 80
 ---
