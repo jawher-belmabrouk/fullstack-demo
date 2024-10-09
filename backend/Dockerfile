@@ -13,7 +13,7 @@ COPY ./src /app/src
 RUN mvn clean package -Dmaven.test.skip=true
 
 #Runtime stage
-# Create a new image for running the application
+# Use slim image for smaller size
 FROM openjdk:17-jdk-slim
 
 # Set the working directory
@@ -22,7 +22,7 @@ WORKDIR /app
 # Copy the built JAR file from the previous stage
 COPY --from=build /app/target/*.jar app.jar
 
-# Expose the port on which the Spring Boot application will run
+# Expose the jar at the port on which the Spring Boot application will run
 EXPOSE 8080
 
 # Command to run the application
