@@ -17,11 +17,13 @@ This project is created as a demonstration in a testing environment. Some securi
 It was created using Windows Docker Desktop with WSL2 (Ubuntu 24.04) integration and a **Kubernetes v1.30.2** cluster.
 The project also uses a **self-managed gitlab runner** and a **gitlab k8s cluster agent**, both deployed inside WSL
 
-![Alt text](./icons/react.png "react"){width=50px height=50px}  ![Alt text](./icons/spring.png "spring"){width=50px height=50px}    ![Alt text](./icons/java.png "java"){width=50px height=50px}    ![Alt text](./icons/maven.png "maven"){width=50px height=50px}  ![Alt text](./icons/pg.png "pg"){width=50px height=50px}
+<img src="./icons/react.png" width="50" height="50">    <img src="./icons/spring.png" width="50" height="50">    <img src="./icons/java.png" width="50" height="50">
 
-![Alt text](./icons/gitlab.png "gitlab"){width=50px height=50px}    ![Alt text](./icons/kaniko.png "kaniko"){width=50px height=50px}
+<img src="./icons/maven.png" width="50" height="50">    <img src="./icons/pg.png" width="50" height="50">
 
-![Alt text](./icons/k8s.png "k8s"){width=50px height=50px}  ![Alt text](./icons/helm.png "helm"){width=50px height=50px}    ![Alt text](./icons/docker.png "docker"){width=50px height=50px}
+<img src="./icons/gitlab.png" width="50" height="50">    <img src="./icons/kaniko.png" width="50" height="50">
+
+<img src="./icons/k8s.png" width="50" height="50">    <img src="./icons/helm.png" width="50" height="50">    <img src="./icons/docker.png" width="50" height="50">
 
 ### Helm Chart Details
 The basic Helm chart is located in the /chartfullstack directory and includes:
@@ -50,12 +52,12 @@ This project uses a **GitLab-CI pipeline** for automating the build and deployme
 3. **Deploy to Kubernetes**:
    - Uses the **GitLab Kubernetes Agent** to install or upgrade the Helm chart in the Kubernetes cluster. The image instantiated by the runner must have the helm and kubectl utilities.
 
-![Alt text](./icons/runner.png "runner")
+<img src="./icons/runner.png "runner")
 
 [**kaniko**](https://docs.gitlab.com/ee/ci/docker/using_kaniko.html) is a tool to build container images from a Dockerfile, inside a container or Kubernetes cluster. kaniko offers higher performance and security vs DinD (Docker-in-Docker)
 
 [**GitLab Cluster Agent**](https://docs.gitlab.com/ee/user/clusters/agent/ci_cd_workflow.html) is a component that enables integration between a Kubernetes cluster and GitLab-ci. The agent is installed on the cluster and communicates with the GitLab instance using the gRPC protocol to offer, for example, cluster context to pipelines. 
-![Alt text](./icons/agent.png "agent")
+<img src="./icons/agent.png "agent")
 
 ## ToDo
 - [x] Readme formatting
